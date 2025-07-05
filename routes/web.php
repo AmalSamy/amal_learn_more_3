@@ -59,12 +59,15 @@ foreach ($news as $new) {
 // });
 
 //راوتس بطريقة الكونترولر
-Route::prefix('site1')->controller(SiteOneController::class)->group(function(){
-Route::get('/home','home');
-Route::get('/about', 'about');
-Route::get('/contact','contact');
+Route::prefix('site1')->name('site1.')->controller(SiteOneController::class)->group(function(){
+Route::get('/home','home')->name('home');
+Route::get('/services','services')->name('services');
+Route::get('/portfolio','portfolio')->name('portfolio');
+Route::get('/about', 'about')->name('about');
+Route::get('/contact','contact')->name('contact');
 //صفحة للمسجات جاية من الcontact
-Route::get('/msg/{id}','msg');
+Route::get('/msg/{id}','msg')->name('msg');
+Route::post('/contact','postcontact')->name('postcontact');
 
 });
 
