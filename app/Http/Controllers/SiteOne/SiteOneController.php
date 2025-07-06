@@ -48,10 +48,25 @@ class SiteOneController extends Controller
 
          return view('SiteOne.msg',compact('id'));
          }
+         function ok() {
+            return view('SiteOne.ok');
+         }
 
           function postcontact(Request $requset) {
             // return 'hello';
-            dd($requset);
-            dd($requset->all());
+            // dd($requset);
+            // dd($requset->all());
+            $requset->validate([
+                'name'=> 'required | string | min:3 | max:15',
+                'phone'=> 'required',
+                'email'=> 'required',
+                'msg'=>'required',
+                'image'=>'required'
+
+            ]);
+            $name = 'SiteOne_'.time() . '_' . rand() . '.' . $requset->file('image')->getClientOriginalExtension();
+            $requset->file('image')->move(public_path('uploads' ), $name);
+            // $requset->file('image')->move(public_path('uploads'),$requset->file('image')->getClientOriginalName());
+            return redirect()->route('site1.ok')->with('name',$requset->name);
     }
 }

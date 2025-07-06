@@ -6,22 +6,31 @@
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Contact Us</h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+
+                       @if($errors->any())
+                <div class = "alert alert-danger" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $e)
+                        <li>{{$e}}</li>
+                        @endforeach
+
+                    </ul>
                 </div>
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- * * SB Forms Contact Form * *-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- This form is pre-integrated with SB Forms.-->
-                <!-- To make this form functional, sign up at-->
-                <!-- https://startbootstrap.com/solution/contact-forms-->
-                <!-- to get an API token!-->
-                <form id="contactForm" method="POST" action="{{route('site1.postcontact')}}">
+                  @endif
+                      </div>
+              
+            
+                <form id="contactForm" enctype="multipart/form-data" method="POST" action="{{route('site1.postcontact')}}">
                     @csrf
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <!-- Name input-->
-                                <input class="form-control" name="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                                <input class="form-control @error('name') is-invalid @enderror" name="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                                <div class="invalid-feedback"></div>
+                                @error('name')
+                                <small class="invalid-feedback">{{$message}}</small>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <!-- Email address input-->
@@ -31,9 +40,15 @@
                             </div>
                             <div class="form-group mb-md-0">
                                 <!-- Phone number input-->
-                                <input class="form-control" name="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                <input class="form-control" name="phone" type="tel" placeholder="Your Phone *"/>
+                                
                             </div>
+                            <div class="form-group mb-md-0 mt-3">
+                                <!-- Phone number input-->
+                                <input class="form-control" name="image" type="file"/>
+                                
+                            </div>
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">

@@ -67,6 +67,7 @@ Route::get('/about', 'about')->name('about');
 Route::get('/contact','contact')->name('contact');
 //صفحة للمسجات جاية من الcontact
 Route::get('/msg/{id}','msg')->name('msg');
+Route::get('/ok','ok')->name('ok');
 Route::post('/contact','postcontact')->name('postcontact');
 
 });
