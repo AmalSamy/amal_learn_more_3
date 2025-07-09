@@ -4,12 +4,19 @@ namespace App\Http\Controllers\SiteOne;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Contact;
+
 
 class SiteOneController extends Controller
 {
     function home() {
         // echo '<h1> home </h1>';
         return view('SiteOne.home');
+    }
+
+    function viewcontact() {
+        $contacts = CONTACT::all();
+        return view('SiteOne.view_contact', compact('contacts'));
     }
  function services() {
         return view('SiteOne.services');
@@ -67,6 +74,23 @@ class SiteOneController extends Controller
             $name = 'SiteOne_'.time() . '_' . rand() . '.' . $requset->file('image')->getClientOriginalExtension();
             $requset->file('image')->move(public_path('uploads' ), $name);
             // $requset->file('image')->move(public_path('uploads'),$requset->file('image')->getClientOriginalName());
+
+            // DB::statment('INSERT INTO ...'); طريقة قديمة وقد تستخدم وقت الحاجة الضرورية
+            // DB::insert('contacts',[]);
+
+            Contact::create([
+                'name'=> $requset->name,
+                'phone'=> $requset->phone,
+                'email'=> $requset->email,
+                'msg'=>$requset->msg,
+                'image'=> $name,
+            ]);
+
+
+
+
+
+
             return redirect()->route('site1.ok')->with('name',$requset->name);
     }
 }
