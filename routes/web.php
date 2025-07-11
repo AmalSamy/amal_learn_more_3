@@ -70,6 +70,9 @@ Route::get('/msg/{id}','msg')->name('msg');
 Route::get('/ok','ok')->name('ok');
 Route::post('/contact','postcontact')->name('postcontact');
 Route::get('/viewcontact','viewcontact')->name('viewcontact');
+Route::post('/update','update')->name('update');
+Route::get('/edit/{id}','edit')->name('edit');
+
 
 
 });
